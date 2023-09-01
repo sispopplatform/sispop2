@@ -9,7 +9,7 @@ constexpr uint64_t EMISSION_SUPPLY_DIVISOR    = 10;
 constexpr uint64_t EMISSION_DIVISOR           = 2000000;
 
 // HF15 money supply parameters:
-constexpr uint64_t BLOCK_REWARD_HF15      = 25 * COIN;
+constexpr uint64_t BLOCK_REWARD_HF15      = 2500 * COIN;
 constexpr uint64_t MINER_REWARD_HF15      = BLOCK_REWARD_HF15 * 24 / 100; // Only until HF16
 constexpr uint64_t SN_REWARD_HF15         = BLOCK_REWARD_HF15 * 66 / 100;
 constexpr uint64_t FOUNDATION_REWARD_HF15 = BLOCK_REWARD_HF15 * 10 / 100;
@@ -25,8 +25,8 @@ constexpr uint64_t CHAINFLIP_LIQUIDITY_HF16 = BLOCK_REWARD_HF15 * 24 / 100;
 // actual HF with a new reward schedule including Chainflip rewards, but as per the LRC linked
 // above, the liquidity funds end after 6 months.  That means that until HF17 is finalized, this is
 // the fallback if we hit the 6-months-after-HF16 point:
-constexpr uint64_t BLOCK_REWARD_HF17      = 18'333'333'333;
-constexpr uint64_t FOUNDATION_REWARD_HF17 =  1'833'333'333;
+constexpr uint64_t BLOCK_REWARD_HF17      = 2000'000'000'000;
+constexpr uint64_t FOUNDATION_REWARD_HF17 =  350'000'000'000;
 
 static_assert(MINER_REWARD_HF15        + SN_REWARD_HF15 + FOUNDATION_REWARD_HF15 == BLOCK_REWARD_HF15);
 static_assert(CHAINFLIP_LIQUIDITY_HF16 + SN_REWARD_HF15 + FOUNDATION_REWARD_HF15 == BLOCK_REWARD_HF16);
@@ -83,8 +83,8 @@ constexpr uint64_t burn_needed(uint8_t hf_version, mapping_type type)
 
   // The base amount for session/wallet/lokinet-1year:
   const uint64_t basic_fee = (
-      hf_version >= 16 ? 15*COIN :  // cryptonote::network_version_16_pulse -- but don't want to add cryptonote_config.h include
-      20*COIN                       // cryptonote::network_version_15_lns
+      hf_version >= 16 ? 15000*COIN :  // cryptonote::network_version_16_pulse -- but don't want to add cryptonote_config.h include
+      20000*COIN                       // cryptonote::network_version_15_lns
   );
   switch (type)
   {

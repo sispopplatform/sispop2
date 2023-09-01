@@ -22,84 +22,21 @@ uint64_t get_staking_requirement(cryptonote::network_type m_nettype, uint64_t he
   if (m_nettype == cryptonote::DEVNET)
       return get_staking_requirement(cryptonote::MAINNET, 600000 + height, hf_version) / 10;
 
-  if (hf_version >= cryptonote::network_version_16_pulse)
-    return 15000'000000000;
 
-  if (hf_version >= cryptonote::network_version_13_enforce_checkpoints)
-  {
-    // TODO: after HF16 we can remove excess elements here: we need to keep the first one higher
-    // than the HF16 fork height, but can delete everything above that (which probably will mean
-    // removing 688244 and above).
-    constexpr int64_t heights[] = {
-        385824,
-        429024,
-        472224,
-        515424,
-        558624,
-        601824,
-        645024,
-        688224,
-        731424,
-        774624,
-        817824,
-        861024,
-        1000000,
-    };
 
-    constexpr int64_t lsr[] = {
-        20458'380815527,
-        19332'319724305,
-        18438'564443912,
-        17729'190407764,
-        17166'159862153,
-        16719'282221956,
-        16364'595203882,
-        16083'079931076,
-        15859'641110978,
-        15682'297601941,
-        15541'539965538,
-        15429'820555489,
-        15000'000000000,
-    };
-
-    assert(static_cast<int64_t>(height) >= heights[0]);
-    constexpr uint64_t LAST_HEIGHT      = heights[loki::array_count(heights) - 1];
-    constexpr uint64_t LAST_REQUIREMENT = lsr    [loki::array_count(lsr) - 1];
-    if (height >= LAST_HEIGHT)
-        return LAST_REQUIREMENT;
-
-    size_t i = 0;
-    for (size_t index = 1; index < loki::array_count(heights); index++)
-    {
-      if (heights[index] > static_cast<int64_t>(height))
-      {
-        i = (index - 1);
-        break;
-      }
-    }
-
-    int64_t H      = height;
-    int64_t result = lsr[i] + (H - heights[i]) * ((lsr[i + 1] - lsr[i]) / (heights[i + 1] - heights[i]));
-    return static_cast<uint64_t>(result);
-  }
-
-  uint64_t hardfork_height = 101250;
+  uint64_t hardfork_height = 105;
   if (height < hardfork_height) height = hardfork_height;
 
   uint64_t height_adjusted = height - hardfork_height;
   uint64_t base = 0, variable = 0;
   std::fesetround(FE_TONEAREST);
-  if (hf_version >= cryptonote::network_version_11_infinite_staking)
-  {
-    base     = 15000 * COIN;
-    variable = (25007.0 * COIN) / loki::exp2(height_adjusted/129600.0);
-  }
-  else
-  {
-    base      = 10000 * COIN;
-    variable  = (35000.0 * COIN) / loki::exp2(height_adjusted/129600.0);
-  }
-
+   if (height >= 133) {
+    base     = 75000 * COIN;
+    variable = (75000 * COIN) / sispop::exp2(height_adjusted/129600.0);
+    } else {
+    base     = 1500 * COIN;
+    variable = (1500 * COIN) / sispop::exp2(height_adjusted/129600.0);
+    }
   uint64_t result = base + variable;
   return result;
 }

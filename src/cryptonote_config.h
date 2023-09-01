@@ -45,7 +45,7 @@ using namespace std::literals;
 #define CRYPTONOTE_MAX_TX_SIZE                          1000000
 #define CRYPTONOTE_MAX_TX_PER_BLOCK                     0x10000000
 #define CRYPTONOTE_PUBLIC_ADDRESS_TEXTBLOB_VER          0
-#define CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW            30
+#define CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW            60
 #define CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V2           60*10
 #define CRYPTONOTE_DEFAULT_TX_SPENDABLE_AGE             10
 #define CRYPTONOTE_DEFAULT_TX_MIXIN                     9
@@ -171,7 +171,7 @@ constexpr uint64_t BLOCKS_EXPECTED_IN_YEARS(int years) { return BLOCKS_EXPECTED_
 #define P2P_SUPPORT_FLAG_FLUFFY_BLOCKS                  0x01
 #define P2P_SUPPORT_FLAGS                               P2P_SUPPORT_FLAG_FLUFFY_BLOCKS
 
-#define CRYPTONOTE_NAME                         "loki"
+#define CRYPTONOTE_NAME                         "sispop"
 #define CRYPTONOTE_POOLDATA_FILENAME            "poolstate.bin"
 #define CRYPTONOTE_BLOCKCHAINDATA_FILENAME      "data.mdb"
 #define CRYPTONOTE_BLOCKCHAINDATA_LOCK_FILENAME "lock.mdb"
@@ -229,24 +229,24 @@ namespace config
   inline constexpr uint64_t HEIGHT_ESTIMATE_HEIGHT = 582088;
   inline constexpr time_t HEIGHT_ESTIMATE_TIMESTAMP = 1595359932;
 
-  inline constexpr uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 114;
-  inline constexpr uint64_t CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 115;
-  inline constexpr uint64_t CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 116;
-  inline constexpr uint16_t P2P_DEFAULT_PORT = 22022;
-  inline constexpr uint16_t RPC_DEFAULT_PORT = 22023;
-  inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 22024;
-  inline constexpr uint16_t QNET_DEFAULT_PORT = 22025;
+  inline constexpr uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 18;
+  inline constexpr uint64_t CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 19;
+  inline constexpr uint64_t CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 20;
+  inline constexpr uint16_t P2P_DEFAULT_PORT = 20000;
+  inline constexpr uint16_t RPC_DEFAULT_PORT = 30000;
+  inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 40000;
+  inline constexpr uint16_t QNET_DEFAULT_PORT = 50000;
   inline constexpr boost::uuids::uuid const NETWORK_ID = { {
-        0x46 ,0x61, 0x72, 0x62 ,0x61, 0x75, 0x74, 0x69, 0x2a, 0x4c, 0x61, 0x75, 0x66, 0x65, 0x79
+         0x01 ,0x30, 0x60, 0x70 ,0x15, 0x30, 0x45, 0x60, 0x75, 0x80, 0x34, 0x67, 0x25, 0x39, 0x80
     } }; // Bender's nightmare
-  inline constexpr std::string_view GENESIS_TX = "021e01ff000380808d93f5d771027c4fd4553bc9886f1f49e3f76d945bf71e8632a94e6c177b19cbc780e7e6bdb48080b4ccd4dfc60302c8b9f6461f58ef3f2107e577c7425d06af584a1c7482bf19060e84059c98b4c3808088fccdbcc32302732b53b0b0db706fcc3087074fb4b786da5ab72b2065699f9453448b0db27f892101ed71f2ce3fc70d7b2036f8a4e4b3fb75c66c12184b55a908e7d1a1d6995566cf00"sv;
-  inline constexpr uint32_t GENESIS_NONCE = 1022201;
+  inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1"sv;
+  inline constexpr uint32_t GENESIS_NONCE = 70;
 
   inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = BLOCKS_EXPECTED_IN_DAYS(7);
   inline constexpr std::array GOVERNANCE_WALLET_ADDRESS =
   {
-    "LCFxT37LAogDn1jLQKf4y7aAqfi21DjovX9qyijaLYQSdrxY1U5VGcnMJMjWrD9RhjeK5Lym67wZ73uh9AujXLQ1RKmXEyL"sv, // hardfork v7-10
-    "LDBEN6Ut4NkMwyaXWZ7kBEAx8X64o6YtDhLXUP26uLHyYT4nFmcaPU2Z2fauqrhTLh4Qfr61pUUZVLaTHqAdycETKM1STrz"sv, // hardfork v11
+    "49HsfhWTvKZgc4qH1hwcEpM99Ng2TqmcxVHJoSkSQvV3N9iVJP1NT6gJTWRvuTWMNqeDgHNUcrpYVdnXW5Ep33W33YfwqRe"sv,
+    "49HsfhWTvKZgc4qH1hwcEpM99Ng2TqmcxVHJoSkSQvV3N9iVJP1NT6gJTWRvuTWMNqeDgHNUcrpYVdnXW5Ep33W33YfwqRe"sv,
   };
 
   // Hash domain separators
@@ -270,15 +270,15 @@ namespace config
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 156;
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 157;
     inline constexpr uint64_t CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 158;
-    inline constexpr uint16_t P2P_DEFAULT_PORT = 38156;
-    inline constexpr uint16_t RPC_DEFAULT_PORT = 38157;
-    inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 38158;
-    inline constexpr uint16_t QNET_DEFAULT_PORT = 38159;
+    inline constexpr uint16_t P2P_DEFAULT_PORT = 22000;
+    inline constexpr uint16_t RPC_DEFAULT_PORT = 33000;
+    inline constexpr uint16_t ZMQ_RPC_DEFAULT_PORT = 44000;
+    inline constexpr uint16_t QNET_DEFAULT_PORT = 55000;
     inline constexpr boost::uuids::uuid const NETWORK_ID = { {
-        0x5f, 0x3a, 0x78, 0x65, 0xe1, 0x6f, 0xca, 0xb8, 0x02, 0xa1, 0xdc, 0x17, 0x61, 0x64, 0x15, 0xbe,
+        0x5f, 0x3a, 0x78, 0x65, 0x22, 0x44, 0xca, 0x55, 0x02, 0xa1, 0xdc, 0x17, 0x61, 0x64, 0x15, 0xbe,
       } }; // Bender's daydream
-    inline constexpr std::string_view GENESIS_TX = "03011e001e01ff00018080c9db97f4fb270259b546996f69aa71abe4238995f41d780ab1abebcac9f00e808f147bdb9e3228420112573af8c309b69a1a646f41b5212ba7d9c4590bf86e04f36c486467cfef9d3d72000000000000000000000000000000000000000000000000000000000000000000"sv;
-    inline constexpr uint32_t GENESIS_NONCE = 10001;
+    inline constexpr std::string_view GENESIS_TX = "013c01ff0001ffffffffffff03029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd08807121017767aafcde9be00dcfd098715ebcf7f410daebc582fda69d24a28e9d0bc890d1"sv;
+    inline constexpr uint32_t GENESIS_NONCE = 70;
 
     inline constexpr uint64_t GOVERNANCE_REWARD_INTERVAL_IN_BLOCKS = 1000;
     inline constexpr std::array GOVERNANCE_WALLET_ADDRESS =
